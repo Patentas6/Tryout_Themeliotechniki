@@ -2,6 +2,7 @@
 
 > **Last Updated:** 2026-10-27
 > **Workspace Root:** `C:\Users\nikth\Desktop\NIKOLAS TRY`
+> **GitHub Remote (`origin`):** `https://github.com/Patentas6/Tryout_Themeliotechniki.git`
 > **Sync Bridge:** `.agent-memory/` + Git (`sync_push.bat` / `sync_pull.bat`)
 
 ---

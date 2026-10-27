@@ -29,8 +29,8 @@
 ## Active / Pending Tasks
 
 ### Priority 1: Multi-PC Git Remote Connection
-- [ ] Create a private GitHub repository (e.g., `nikolas-try-workspace`) and link it on PC 1 (`git remote add origin <URL>` + `sync_push.bat`).
-- [ ] Clone the repository on PC 2 and verify seamless pickup in Antigravity (`sync_pull.bat`).
+- [x] Create a private GitHub repository (`https://github.com/Patentas6/Tryout_Themeliotechniki.git`) and link it on PC 1 (`git remote add origin` + push).
+- [ ] Clone `https://github.com/Patentas6/Tryout_Themeliotechniki.git` on PC 2 (`cd "$HOME\Desktop"; git clone https://github.com/Patentas6/Tryout_Themeliotechniki.git "NIKOLAS TRY"`) and verify seamless pickup in Antigravity (`sync_pull.bat`).
 
 ### Priority 2: Bored Piles (`Κανονες_Πασσαλων`) Open TODOs (from `ACTIVE_VERSION.json`)
 - [ ] **TODO 1 (Drilling Cost Breakdown):** Add detailed analytical cost breakdown slide/section per pile hole / drilling (`Κόστος ανά Τρύπα / Διάτρηση Πασσάλων`) in the company catalog.
