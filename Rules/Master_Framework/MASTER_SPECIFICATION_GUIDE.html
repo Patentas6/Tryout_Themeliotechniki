@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ΘΕΜΕΛΙΟΤΕΧΝΙΚΗ ΛΤΔ — Γενικό Πλαίσιο Κοστολόγησης & Αρχιτεκτονικής Excel</title>
+    <style>
+        :root {
+            --primary: #1F4E79;
+            --primary-dark: #0F2D4A;
+            --chap-a: #1E4D2B;
+            --chap-b: #2F5597;
+            --input-green: #E2EFDA;
+            --calc-gray: #F2F2F2;
+            --total-green: #C6EFCE;
+            --unit-yellow: #FFF2CC;
+            --alert-orange: #FFE699;
+            --alert-red: #9C0006;
+            --text-main: #262626;
+            --border-color: #D9D9D9;
+            --bg-light: #F8F9FA;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F4F6F9;
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        header {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: var(--primary);
+            margin: 0 0 5px 0;
+            font-size: 24px;
+        }
+
+        .subtitle {
+            color: #595959;
+            font-size: 14px;
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .badge-ver {
+            display: inline-block;
+            background: var(--primary);
+            color: #FFFFFF;
+            padding: 3px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            border-top: 4px solid var(--primary);
+        }
+
+        .card h3 {
+            margin: 0 0 10px 0;
+            font-size: 15px;
+            color: var(--primary);
+        }
+
+        .card p {
+            margin: 0;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .section-title {
+            background: var(--primary);
+            color: #FFFFFF;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 30px 0 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .color-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: var(--bg-light);
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .color-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .swatch {
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            border: 1px solid rgba(0,0,0,0.15);
+        }
+
+        /* Mockup Excel Tables */
+        table.excel-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-bottom: 25px;
+            background: #FFFFFF;
+        }
+
+        table.excel-table th, table.excel-table td {
+            border: 1px solid var(--border-color);
+            padding: 7px 10px;
+            vertical-align: middle;
+        }
+
+        table.excel-table th {
+            background-color: #3B3838;
+            color: #FFFFFF;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .banner-chap-a {
+            background-color: var(--chap-a) !important;
+            color: #FFFFFF !important;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .banner-chap-b {
+            background-color: var(--chap-b) !important;
+            color: #FFFFFF !important;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .banner-sub {
+            background-color: #41719C !important;
+            color: #FFFFFF !important;
+            font-weight: 600;
+        }
+
+        .c-input { background-color: var(--input-green) !important; font-weight: bold; }
+        .c-calc { background-color: var(--calc-gray) !important; }
+        .c-total { background-color: var(--total-green) !important; font-weight: bold; }
+        .c-yellow { background-color: var(--unit-yellow) !important; font-weight: bold; }
+        .c-orange { background-color: var(--alert-orange) !important; font-weight: bold; color: #8A4B00; }
+        .c-subtotal { background-color: #E9EEF4 !important; font-weight: bold; color: var(--primary); }
+        .c-grand { background-color: #D9E1F2 !important; font-weight: bold; color: var(--primary); font-size: 13px; }
+
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .source-tag { color: #1B365D; font-weight: bold; }
+        .alert-tag { color: var(--alert-red); font-weight: bold; }
+
+        .formula-pill {
+            background: #EBF3FA;
+            color: #1F4E79;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+            font-size: 11px;
+            border: 1px solid #C4D9EC;
+            display: inline-block;
+        }
+
+        .rule-callout {
+            border-left: 4px solid var(--primary);
+            background: #F1F6FA;
+            padding: 12px 16px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+            font-size: 13px;
+        }
+
+        .rule-callout strong {
+            color: var(--primary);
+        }
+
+        footer {
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+            font-size: 12px;
+            color: #777;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge-ver">ΕΠΙΣΗΜΟ MASTER FRAMEWORK v1.0</span>
+        <h1>ΘΕΜΕΛΙΟΤΕΧΝΙΚΗ ΛΤΔ — ΕΝΙΑΙΟ ΠΛΑΙΣΙΟ ΚΟΣΤΟΛΟΓΗΣΗΣ & EXCEL</h1>
+        <p class="subtitle">Κοινή Αρχιτεκτονική, Κανόνες Δυναμικότητας, Citations & Στάνταρ Formatting για Όλα τα Έργα (Εδαφοηλώσεις, Berlin Wall, Αγκυρώσεις, Πασσαλοστοιχίες, κ.λπ.)</p>
+    </header>
+
+    <!-- 4 Core Pillars of Framework -->
+    <div class="card-grid">
+        <div class="card">
+            <h3>1. Single Source of Truth</h3>
+            <p>Όλες οι πρωτογενείς παράμετροι εισάγονται <strong>ΜΙΑ ΦΟΡΑ</strong> στο Κεφάλαιο Α. Κανένας αριθμός δεν είναι hardcoded σε υπολογισμούς ή σημειώσεις.</p>
+        </div>
+        <div class="card">
+            <h3>2. 100% Δυναμικές Σημειώσεις</h3>
+            <p>Όλα τα κείμενα επεξήγησης γράφονται με δυναμικές συναρτήσεις Excel (<code>="=" & B34 & " οπές..."</code>). Αλλαγή σε 1 κελί $\rightarrow$ αλλαγή παντού!</p>
+        </div>
+        <div class="card">
+            <h3>3. Πλήρες Audit & Citations</h3>
+            <p>Κάθε αριθμός συνοδεύεται από την ακριβή πηγή του σχεδίου (Στήλη D) και σήμανση <code>[DEFAULT]</code>, <code>[OVERRIDE]</code> ή <code>[ΣΥΓΚΡΟΥΣΗ]</code> (Στήλη E).</p>
+        </div>
+        <div class="card">
+            <h3>4. Active Version & Copy-on-Change</h3>
+            <p>Το AI διαβάζει ΠΑΝΤΑ το <code>ACTIVE_VERSION.json</code> (π.χ. v7 ή v4). <strong>ΠΟΤΕ δεν αλλάζουμε την ενεργή έκδοση in-place</strong>: αντιγράφουμε σε νέα έκδοση (v8, v5) και μόνο αφού εγκριθεί προάγεται στο <code>ACTIVE_VERSION.json</code>!</p>
+        </div>
+    </div>
+
+    <!-- Color Legend -->
+    <div class="color-legend">
+        <div class="color-box">
+            <div class="swatch" style="background: #E2EFDA;"></div>
+            <span>Inputs Μελέτης (#E2EFDA)</span>
+        </div>
+        <div class="color-box">
+            <div class="swatch" style="background: #F2F2F2;"></div>
+            <span>Υπολογισμοί Φυσικών Μεγεθών (#F2F2F2)</span>
+        </div>
+        <div class="color-box">
+            <div class="swatch" style="background: #C6EFCE;"></div>
+            <span>Σύνολα Ποσοτήτων (#C6EFCE)</span>
+        </div>
+        <div class="color-box">
+            <div class="swatch" style="background: #FFF2CC;"></div>
+            <span>Τιμές Μονάδας € (#FFF2CC)</span>
+        </div>
+        <div class="color-box">
+            <div class="swatch" style="background: #FFE699;"></div>
+            <span>Ειδική Τιμή / Σύγκρουση (#FFE699)</span>
+        </div>
+        <div class="color-box">
+            <div class="swatch" style="background: #D9E1F2;"></div>
+            <span>Τελικά Πληρωτέα Ποσά (#D9E1F2)</span>
+        </div>
+    </div>
+
+    <!-- Architecture Section -->
+    <div class="section-title">
+        <span>ΦΥΛΛΟ 1: «1_Στοιχεία_Μελέτης_&_Ποσότητες» (ΧΩΡΙΣ €)</span>
+        <span style="font-size: 12px; font-weight: normal;">Αυστηρή Διάκριση Κεφαλαίου Α & Κεφαλαίου Β</span>
+    </div>
+
+    <div class="rule-callout">
+        <strong>Κανόνας 100% Δυναμικότητας:</strong> Εάν ο χρήστης αλλάξει το πλήθος πασσάλων από <strong>98</strong> σε <strong>99</strong> στο κελί B34, όλες οι σημειώσεις στο Κεφάλαιο Α, στο Κεφάλαιο Β και στο Φύλλο 2 ενημερώνονται αυτόματα στο <strong>99</strong> χωρίς καμία στατική αναφορά!
+    </div>
+
+    <!-- Table Preview Sheet 1 -->
+    <table class="excel-table">
+        <thead>
+            <tr>
+                <th style="width: 32%;">Περιγραφή Στοιχείου / Υπολογισμού (Στήλη A)</th>
+                <th style="width: 14%; text-align: center;">Τιμή / Αποτέλεσμα (Στήλη B)</th>
+                <th style="width: 10%; text-align: center;">Μονάδα (Στήλη C)</th>
+                <th style="width: 22%;">Πηγή Μελέτης / Δυναμικός Τύπος (Στήλη D)</th>
+                <th style="width: 22%;">Τεχνική Σημείωση / Έλεγχος Κανόνα (Στήλη E)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Chap A Banner -->
+            <tr>
+                <td colspan="5" class="banner-chap-a">🏛️ ΚΕΦΑΛΑΙΟ Α: ΜΟΝΟ ΣΤΟΙΧΕΙΑ ΠΟΥ ΔΙΑΒΑΣΤΗΚΑΝ ΑΠΟ ΤΗ ΜΕΛΕΤΗ (RAW INPUTS & CITATIONS)</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="banner-sub">Α.4 H-Beams / Πασσαλοκολώνες Berlin Wall</td>
+            </tr>
+            <tr>
+                <td>Αξονική Απόσταση Πασσάλων (s_beam)</td>
+                <td class="c-input text-center">2.00</td>
+                <td class="text-center">m</td>
+                <td class="source-tag">Σχέδιο Σ01.1, Κάτοψη -12.50m</td>
+                <td><span class="formula-pill">="Ανά " & TEXT(B33,"0.00") & " m c/c"</span></td>
+            </tr>
+            <tr>
+                <td>Συνολικό Πλήθος Οπών / Πασσάλων Έργου</td>
+                <td class="c-input text-center">98</td>
+                <td class="text-center">οπές</td>
+                <td class="source-tag">Σχέδιο Σ01.1, Κάτοψη -12.50m</td>
+                <td><span class="formula-pill">="=" & B34 & " διαστήματα (" & B34*B33 & "m)"</span></td>
+            </tr>
+            <tr>
+                <td>Διάμετρος Διάτρησης (min Ø800 mm)</td>
+                <td class="c-input text-center">0.80</td>
+                <td class="text-center">m</td>
+                <td class="source-tag">Σχέδιο Σ02.1 & Κανόνας v2</td>
+                <td><span class="alert-tag">[OVERRIDE]: Ζητήθηκε Ø600 mm $\rightarrow$ Ø800 mm</span></td>
+            </tr>
+            <tr>
+                <td>Πλήθος Αγκυρώσεων ανά Σειρά</td>
+                <td class="c-input text-center" style="color: #1F4E79;"><span class="formula-pill">=B34</span></td>
+                <td class="text-center">τεμ / σειρά</td>
+                <td class="source-tag">Σχέδιο Σ01.1 & Σ02.1</td>
+                <td><span class="formula-pill">="1 αγκύρωση ανά πάσσαλο (" & B52 & " τεμ)"</span></td>
+            </tr>
+
+            <!-- Chap B Banner -->
+            <tr>
+                <td colspan="5" class="banner-chap-b">⚙️ ΚΕΦΑΛΑΙΟ Β: ΟΛΟΙ ΟΙ ΥΠΟΛΟΓΙΣΜΟΙ ΦΥΣΙΚΩΝ ΜΕΓΕΘΩΝ (100% ΔΥΝΑΜΙΚΗ ΣΥΝΔΕΣΗ ΜΕ ΤΟ ΚΕΦ. Α)</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="banner-sub">Β.3 Υπολογισμοί H-Beams & Πασσάλων</td>
+            </tr>
+            <tr>
+                <td>ΣΥΝΟΛΙΚΑ ΜΕΤΡΑ ΔΙΑΤΡΗΣΗΣ ΤΡΥΠΑΝΙΟΥ</td>
+                <td class="c-total text-center">1,519.00</td>
+                <td class="text-center">m</td>
+                <td><span class="formula-pill">="=" & B34 & " οπές x " & TEXT(B77,"0.00") & " m"</span></td>
+                <td><span class="formula-pill">="=" & B34 & " οπές x " & TEXT(B77,"0.00") & "m = " & TEXT(B78,"#,##0.00") & " m"</span></td>
+            </tr>
+            <tr>
+                <td>ΣΥΝΟΛΙΚΟ ΒΑΡΟΣ ΧΑΛΥΒΑ ΝΕΦΚΩΝ (2xUPN 350)</td>
+                <td class="c-total text-center">178,164.00</td>
+                <td class="text-center">kg</td>
+                <td><span class="formula-pill">="=" & B34 & " οπές x " & B39 & " x " & TEXT(B38,"0.0") & "m x " & B40</span></td>
+                <td><span class="formula-pill">="Συνολικό βάρος = " & TEXT(B81,"#,##0.00") & " kg"</span></td>
+            </tr>
+            <tr>
+                <td>ΣΥΝΟΛΙΚΟ ΠΛΗΘΟΣ ΛΑΜΩΝ ΣΥΝΔΕΣΗΣ</td>
+                <td class="c-total text-center">2,450</td>
+                <td class="text-center">τεμάχια</td>
+                <td><span class="formula-pill">="=" & B34 & " πάσσαλοι x " & B82 & " λάμες/πάσσαλο"</span></td>
+                <td><span class="formula-pill">="=" & B34 & " πάσσαλοι x " & B82 & " λάμες = " & TEXT(B83,"#,##0") & " λάμες"</span></td>
+            </tr>
+            <tr>
+                <td>ΣΥΝΟΛΙΚΟΣ ΟΓΚΟΣ ΚΟΥΓΚΡΙΟΥ ΠΑΚΤΩΣΗΣ</td>
+                <td class="c-total text-center">147.78</td>
+                <td class="text-center">m³</td>
+                <td><span class="formula-pill">="=" & B34 & " πάσσαλοι x " & TEXT(B86,"0.0000") & " m³"</span></td>
+                <td><span class="formula-pill">="=" & B34 & " πάσσαλοι x " & TEXT(B86,"0.0000") & " m³ = " & TEXT(B87,"#,##0.00") & " m³ (" & B44 & ")"</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Architecture Section 2 -->
+    <div class="section-title">
+        <span>ΦΥΛΛΟ 2: «2_Υπολογισμοί_&_Κοστολόγηση» (ΕΥΡΩ €)</span>
+        <span style="font-size: 12px; font-weight: normal;">4 Πυλώνες Κοστολόγησης, Κίτρινες Τιμές (#FFF2CC) & KPIs</span>
+    </div>
+
+    <!-- Table Preview Sheet 2 -->
+    <table class="excel-table">
+        <thead>
+            <tr>
+                <th style="width: 8%; text-align: center;">Α/Α</th>
+                <th style="width: 32%;">Περιγραφή Εργασίας / Υλικού (Στήλη B)</th>
+                <th style="width: 14%; text-align: center;">Ποσότητα [Φύλλο 1] (Στήλη C)</th>
+                <th style="width: 8%; text-align: center;">Μονάδα (Στήλη D)</th>
+                <th style="width: 14%; text-align: right;">Τιμή Μονάδας € (Στήλη E)</th>
+                <th style="width: 14%; text-align: right;">Σύνολο € (Στήλη F)</th>
+                <th style="width: 10%;">Σημείωση (Στήλη G)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="7" class="banner-sub">ΠΥΛΩΝΑΣ 3: ΜΕΤΑΛΛΙΚΕΣ ΚΟΛΩΝΕΣ (H-BEAMS) & ΠΑΣΣΑΛΟΙ</td>
+            </tr>
+            <tr>
+                <td class="text-center">3.1</td>
+                <td>Διάτρηση Μεγάλου Τρυπανιού (Ø800 mm)</td>
+                <td class="text-center"><span class="formula-pill">='1_Στοιχεία'!B78</span></td>
+                <td class="text-center">m</td>
+                <td class="c-yellow text-right">75.00 €</td>
+                <td class="text-right" style="font-weight: bold;">113,925.00 €</td>
+                <td><span class="formula-pill">="Ø800 mm για " & B34 & " πασσάλους"</span></td>
+            </tr>
+            <tr>
+                <td class="text-center">3.2</td>
+                <td>Χάλυβας Νέφκων (2xUPN 350 @ 60.6 kg/m)</td>
+                <td class="text-center"><span class="formula-pill">='1_Στοιχεία'!B81</span></td>
+                <td class="text-center">kg</td>
+                <td class="c-yellow text-right">1.40 €</td>
+                <td class="text-right" style="font-weight: bold;">249,429.60 €</td>
+                <td><span class="formula-pill">="=" & B34 & " οπές x 2 x 15m x 60.6 kg/m"</span></td>
+            </tr>
+            <tr>
+                <td class="text-center">3.3</td>
+                <td>Λάμες Σύνδεσης / Ενίσχυσης PLT 350x100x12</td>
+                <td class="text-center"><span class="formula-pill">='1_Στοιχεία'!B85</span></td>
+                <td class="text-center">kg</td>
+                <td class="c-yellow text-right">1.60 €</td>
+                <td class="text-right" style="font-weight: bold;">12,924.24 €</td>
+                <td><span class="formula-pill">="=" & B82 & " λάμες/κολώνα x " & B34</span></td>
+            </tr>
+            <tr>
+                <td class="text-center">3.4</td>
+                <td>Κουγκρί Πάκτωσης Πασσάλων (H=3.0m, Ø800mm)</td>
+                <td class="text-center"><span class="formula-pill">='1_Στοιχεία'!B87</span></td>
+                <td class="text-center">m³</td>
+                <td class="c-orange text-right">120.00 €</td>
+                <td class="text-right" style="font-weight: bold;">17,733.60 €</td>
+                <td><span class="alert-tag">[ΣΥΓΚΡΟΥΣΗ]: C35/45 για 98 πασσάλους</span></td>
+            </tr>
+            <tr>
+                <td colspan="5" class="c-subtotal text-right">ΜΕΡΙΚΟ ΣΥΝΟΛΟ ΠΥΛΩΝΑ 3 (H-BEAMS & ΠΑΣΣΑΛΟΙ):</td>
+                <td class="c-subtotal text-right">394,012.44 €</td>
+                <td class="c-subtotal"></td>
+            </tr>
+            <tr>
+                <td colspan="5" class="c-grand text-right">ΚΑΘΑΡΟ ΣΥΝΟΛΟ ΕΡΓΟΥ (ΑΘΡΟΙΣΜΑ 4 ΠΥΛΩΝΩΝ):</td>
+                <td class="c-grand text-right">951,600.00 €</td>
+                <td class="c-grand"></td>
+            </tr>
+            <tr>
+                <td colspan="5" class="text-right" style="font-weight: bold;">Φ.Π.Α. (19%):</td>
+                <td class="text-right" style="font-weight: bold;">180,804.00 €</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="5" class="c-grand text-right">ΤΕΛΙΚΟ ΣΥΝΟΛΟ ΜΕ Φ.Π.Α. (ΠΛΗΡΩΤΕΟ):</td>
+                <td class="c-grand text-right">1,132,404.00 €</td>
+                <td class="c-grand"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- CAD Object Counting Methodology Section -->
+    <div class="section-title" style="background: #203764;">
+        <span># CAD / Engineering Plan Object Counting Methodology</span>
+        <span style="font-size: 12px; font-weight: normal;">Αυστηρό Πρωτόκολλο Αυτόματης Επιμέτρησης με Python OpenCV</span>
+    </div>
+
+    <div class="card-grid">
+        <div class="card" style="border-top-color: #C00000;">
+            <h3>1. Ποτέ Χειροκίνητη Μέτρηση (Never Manual)</h3>
+            <p><strong>ΑΠΑΓΟΡΕΥΕΤΑΙ</strong> η χειροκίνητη εκτίμηση με το μάτι (κίνδυνος hallucination). Γράφεται και εκτελείται <strong>ΠΑΝΤΑ</strong> script Python OpenCV.</p>
+        </div>
+        <div class="card" style="border-top-color: #2F5597;">
+            <h3>2. Pipeline: a. ROI & b. Template</h3>
+            <p><strong>a. Context ROI:</strong> Εντοπισμός hosting geometry (περίμετρος τοίχου, άξονες), φιλτράρισμα κειμένων & διαστάσεων.<br><strong>b. Template:</strong> Κύκλοι (Hough/kernel), Ορθογώνια (findContours), Μπλοκ (matchTemplate).</p>
+        </div>
+        <div class="card" style="border-top-color: #385723;">
+            <h3>3. Pipeline: c. NMS & d. Checks</h3>
+            <p><strong>c. NMS:</strong> <code>cv2.dnn.NMSBoxes</code> με bboxes [x,y,w,h].<br><strong>d. Sanity Checks:</strong> Έλεγχος έντασης κεντρικού pixel και επαλήθευση αποστάσεων κέντρο-κέντρο (c/c spacing).</p>
+        </div>
+        <div class="card" style="border-top-color: #7030A0;">
+            <h3>4. Output & Verification</h3>
+            <p>Σχεδίαση κόκκινων κύκλων/κουτιών με διαδοχική αρίθμηση (1, 2, 3...) κατά μήκος της φυσικής διαδρομής (chainage). Εξαγωγή ντετερμινιστικού αριθμού & αποθήκευση εικόνας.</p>
+        </div>
+    </div>
+
+    <footer>
+        ΘΕΜΕΛΙΟΤΕΧΝΙΚΗ ΛΤΔ &copy; 2026 — Master Pricing Framework Guide | Το παρόν αρχείο HTML αποτελεί την επίσημη οπτική προδιαγραφή για μηχανικούς και agents.
+    </footer>
+</div>
+
+</body>
+</html>

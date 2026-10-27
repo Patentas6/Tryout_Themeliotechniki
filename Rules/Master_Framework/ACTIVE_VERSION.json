@@ -1,0 +1,9 @@
+{
+  "domain": "Master Geotechnical Pricing Framework",
+  "active_version": "v2",
+  "rules_file": "MASTER_RULES_PRICING_FRAMEWORK_v2.md",
+  "agents_file": "MASTER_AGENTS_PRICING_FRAMEWORK_v2.md",
+  "status": "PRODUCTION",
+  "last_updated": "2026-10-15",
+  "protocol": "Όταν ένα AI ξεκινάει νέο chat, διαβάζει ΠΡΩΤΑ αυτό το αρχείο για να γνωρίζει ποια έκδοση είναι η επίσημη ενεργή (π.χ. v2). Για αλλαγές κανόνων: ΠΟΤΕ δεν πειράζεται η ενεργή έκδοση in-place. Δημιουργείται αντίγραφο v3, δοκιμάζεται, και αν εγκριθεί, ενημερώνεται το παρόν αρχείο σε v3 ώστε να το ακολουθούν όλα τα επόμενα chats. Στον κεντρικό φάκελο διατηρείται ΜΟΝΟ η τρέχουσα ενεργή έκδοση, ενώ όλες οι παλαιότερες αρχειοθετούνται στον υποφάκελο older_versions."
+}

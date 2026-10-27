@@ -1,0 +1,39 @@
+{
+  "project": {"name": "BOLTON TOWER", "folder": "BOLTON_TOWER", "client": "ΛΑΚΕΜΙΑ ΚΤΗΜΑΤΙΚΗ Λτδ", "location": "Λεμεσός",
+              "distance_km": 15, "distance_note": "Λεμεσός — εντός Ζώνης 1", "designer": "Hyperstatic Engineering Design (220138)"},
+  "elevations": {"wpl": null, "cutoff": null},
+  "concrete_class": "C50/60",
+  "concrete_note": "Σχέδιο: «ΚΑΤΗΓΟΡΙΑΣ C50/60 ... ΓΕΝΙΚΑ ΓΙΑ ΟΛΑ ΤΑ ΔΟΜΙΚΑ ΣΤΟΙΧΕΙΑ»",
+  "cover_mm": 75,
+  "cover_note": "Σχέδιο: «ΠΑΣΣΑΛΟΙ : 75mm»",
+  "user_prices": {"drill_1500": 210},
+  "input_notes": {
+    "starter": "Από διάσταση όψης οπλισμού (1600 / 1250 mm)",
+    "s_end": "Συνδετήρες 3m πρώτα & 3m τελευταία μέτρα (κατάλογος πασσάλων)",
+    "s_mid": "Συνδετήρες μέσου (κατάλογος πασσάλων)",
+    "extra_n": "U-BARS 8Y32 / 8Y25 φαίνονται στις όψεις — ΕΚΚΡΕΜΕΙ επιβεβαίωση (προσωρινά 0)"
+  },
+  "groups": [
+    {"label": "Ø1500 L=22.0", "ids": "P1–P21", "count": 21, "D_mm": 1500, "L_pile": 22.0, "n_vert": 16, "y_vert": 32,
+     "starter": 1.60, "y_spiral": 14, "s_end": 100, "end_zone": 3.0, "s_mid": 150},
+    {"label": "Ø1200 L=16.0", "ids": "P22–P32, P41–P42", "count": 13, "D_mm": 1200, "L_pile": 16.0, "n_vert": 16, "y_vert": 25,
+     "starter": 1.25, "y_spiral": 12, "s_end": 100, "end_zone": 3.0, "s_mid": 150},
+    {"label": "Ø1200 L=17.0", "ids": "P36–P40", "count": 5, "D_mm": 1200, "L_pile": 17.0, "n_vert": 16, "y_vert": 25,
+     "starter": 1.25, "y_spiral": 12, "s_end": 100, "end_zone": 3.0, "s_mid": 150},
+    {"label": "Ø1200 L=18.0", "ids": "P33–P35", "count": 3, "D_mm": 1200, "L_pile": 18.0, "n_vert": 16, "y_vert": 25,
+     "starter": 1.25, "y_spiral": 12, "s_end": 100, "end_zone": 3.0, "s_mid": 150},
+    {"label": "Ø1200 L=19.0", "ids": "P43–P48", "count": 6, "D_mm": 1200, "L_pile": 19.0, "n_vert": 16, "y_vert": 25,
+     "starter": 1.25, "y_spiral": 12, "s_end": 100, "end_zone": 3.0, "s_mid": 150},
+    {"label": "Ø1200 L=10.5", "ids": "P49–P50", "count": 2, "D_mm": 1200, "L_pile": 10.5, "n_vert": 16, "y_vert": 25,
+     "starter": 1.25, "y_spiral": 12, "s_end": 100, "end_zone": 3.0, "s_mid": 150}
+  ],
+  "notes": [
+    "Τιμολόγηση διάτρησης Ø1500mm στα 210,00 €/m κατόπιν οδηγίας (εκτός τιμοκαταλόγου).",
+    "ΣΗΜΕΙΩΣΗ ΤΙΜΩΝ ΔΙΑΤΡΗΣΗΣ: Οι τιμές τρυπήματος / διάτρησης ενδέχεται να αναθεωρηθούν μελλοντικά βάσει συνθηκών αγοράς, κόστους καυσίμων και διαθεσιμότητας εξοπλισμού."
+  ],
+  "assumptions": [
+    "Γωνίες πάνω / πυθμένα: δεν δίνονται στο σχέδιο — 0.00 m.",
+    "Starter P49–P50 (πεδιλόπλακα 0.80 m): προσωρινά 1.25 m — εκκρεμεί επιβεβαίωση.",
+    "U-bars: προσωρινά εκτός — εκκρεμεί επιβεβαίωση."
+  ]
+}

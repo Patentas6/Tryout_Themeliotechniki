@@ -1,0 +1,17 @@
+# Office / Excel temporary lock files
+~$*.xlsx
+~$*.xls
+~$*.docx
+~$*.pptx
+*.tmp
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
